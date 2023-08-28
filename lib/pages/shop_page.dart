@@ -1,3 +1,5 @@
+import 'package:bubble_tea_app/components/drink_tile.dart';
+import 'package:bubble_tea_app/models/drink.dart';
 import 'package:bubble_tea_app/models/shop.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,9 +30,13 @@ class _ShopPageState extends State<ShopPage> {
               Expanded(
                 child: ListView.builder(
                   itemCount: value.shop.length,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text(value.shop[index].name),
-                  ),
+                  itemBuilder: (context, index) {
+                    //get individual drink from shop
+                    Drink individualDrink = value.shop[index];
+
+                    //return that drink as a nice Tile
+                    return DrinkTile(drink: individualDrink);
+                  },
                 ),
               ),
             ],
