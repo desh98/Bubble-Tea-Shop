@@ -1,6 +1,7 @@
 import 'package:bubble_tea_app/components/drink_tile.dart';
 import 'package:bubble_tea_app/models/drink.dart';
 import 'package:bubble_tea_app/models/shop.dart';
+import 'package:bubble_tea_app/pages/order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,19 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
+  //user selected a drink, go to order page
+  void goToOrderPage(Drink drink) {
+    //navigate to order page
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => OrderPage(
+          drink: drink,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<BubbleTeaShop>(
@@ -25,18 +39,27 @@ class _ShopPageState extends State<ShopPage> {
                 "Bubble Tea Shop",
                 style: TextStyle(fontSize: 20),
               ),
+              SizedBox(
+                height: 15,
+              ),
 
               //list of drinks for sale
               Expanded(
-                child: ListView.builder(
-                  itemCount: value.shop.length,
-                  itemBuilder: (context, index) {
-                    //get individual drink from shop
-                    Drink individualDrink = value.shop[index];
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView.builder(
+                    itemCount: value.shop.length,
+                    itemBuilder: (context, index) {
+                      //get individual drink from shop
+                      Drink individualDrink = value.shop[index];
 
-                    //return that drink as a nice Tile
-                    return DrinkTile(drink: individualDrink);
-                  },
+                      //return that drink as a nice Tile
+                      return DrinkTile(
+                        drink: individualDrink,
+                        onTap: () => goToOrderPage(individualDrink),
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
