@@ -43,22 +43,19 @@ class _ShopPageState extends State<ShopPage> {
 
               //list of drinks for sale
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListView.builder(
-                    itemCount: value.shop.length,
-                    itemBuilder: (context, index) {
-                      //get individual drink from shop
-                      Drink individualDrink = value.shop[index];
+                child: ListView.builder(
+                  itemCount: value.shop.length,
+                  itemBuilder: (context, index) {
+                    //get individual drink from shop
+                    Drink individualDrink = value.shop[index];
 
-                      //return that drink as a nice Tile
-                      return DrinkTile(
-                        drink: individualDrink,
-                        onTap: () => goToOrderPage(individualDrink),
-                        trailing: Icon(Icons.arrow_forward),
-                      );
-                    },
-                  ),
+                    //return that drink as a nice Tile
+                    return DrinkTile(
+                      drink: individualDrink,
+                      onTap: () => goToOrderPage(individualDrink),
+                      trailing: Icon(Icons.arrow_forward),
+                    );
+                  },
                 ),
               ),
             ],

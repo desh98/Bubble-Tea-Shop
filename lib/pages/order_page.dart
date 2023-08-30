@@ -1,5 +1,7 @@
 import 'package:bubble_tea_app/models/drink.dart';
+import 'package:bubble_tea_app/models/shop.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OrderPage extends StatefulWidget {
   final Drink drink;
@@ -25,7 +27,7 @@ class _OrderPageState extends State<OrderPage> {
   double iceValue = 0.5;
   void customizeIce(double newValue) {
     setState(() {
-      sweetValue = newValue;
+      iceValue = newValue;
     });
   }
 
@@ -33,8 +35,25 @@ class _OrderPageState extends State<OrderPage> {
   double pearlValue = 0.5;
   void customizePearl(double newValue) {
     setState(() {
-      sweetValue = newValue;
+      pearlValue = newValue;
     });
+  }
+
+  //add to cart
+  void addToCart() {
+    //firstly, add to cart
+    Provider.of<BubbleTeaShop>(context, listen: false).addToCart(widget.drink);
+
+    //direct user back to shop page
+    Navigator.pop(context);
+
+    //let user know it has been successfully added
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Successfully added to cart'),
+      ),
+    );
   }
 
   @override
@@ -56,7 +75,7 @@ class _OrderPageState extends State<OrderPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
+                    const SizedBox(
                       width: 100,
                       child: Text('Sweet'),
                     ),
@@ -73,7 +92,7 @@ class _OrderPageState extends State<OrderPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
+                    const SizedBox(
                       width: 100,
                       child: Text('Ice'),
                     ),
@@ -90,7 +109,7 @@ class _OrderPageState extends State<OrderPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
+                    const SizedBox(
                       width: 100,
                       child: Text('Pearls'),
                     ),
@@ -109,6 +128,14 @@ class _OrderPageState extends State<OrderPage> {
           ),
 
           //add to cart button
+          MaterialButton(
+            child: Text(
+              'Add to cart',
+              style: TextStyle(color: Colors.white),
+            ),
+            color: Colors.brown,
+            onPressed: addToCart,
+          )
         ],
       ),
     );
