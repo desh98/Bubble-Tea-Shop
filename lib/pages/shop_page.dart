@@ -39,9 +39,7 @@ class _ShopPageState extends State<ShopPage> {
                 "Bubble Tea Shop",
                 style: TextStyle(fontSize: 20),
               ),
-              SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 10),
 
               //list of drinks for sale
               Expanded(
@@ -57,6 +55,7 @@ class _ShopPageState extends State<ShopPage> {
                       return DrinkTile(
                         drink: individualDrink,
                         onTap: () => goToOrderPage(individualDrink),
+                        trailing: Icon(Icons.arrow_forward),
                       );
                     },
                   ),
