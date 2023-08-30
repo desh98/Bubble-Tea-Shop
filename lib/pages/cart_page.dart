@@ -54,12 +54,12 @@ class _CartPageState extends State<CartPage> {
 
                 // pay button
                 MaterialButton(
-                  child: Text(
+                  color: Colors.brown,
+                  onPressed: () {},
+                  child: const Text(
                     'PAY',
                     style: TextStyle(color: Colors.white),
                   ),
-                  color: Colors.brown,
-                  onPressed: () {},
                 )
               ],
             ),
